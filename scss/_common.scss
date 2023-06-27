@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    line-height: 1;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    &__title {
+        color: #1b919a;
+        padding: 20px 0;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    &__library {
+        height: 100%;
+    }
+}
