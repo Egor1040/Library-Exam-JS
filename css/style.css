@@ -18,6 +18,11 @@ li {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 .wrapper {
   width: 100%;
   margin: 0 auto;
@@ -57,4 +62,79 @@ li {
 }
 .library-title__items:hover {
   border-bottom: 2px solid #1b919a;
+}
+
+.all-books {
+  border-bottom: 1px solid rgba(192, 192, 192, 0.5450980392);
+  padding: 30px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.all-books__title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1b919a;
+}
+.all-books__button {
+  width: 120px;
+  padding: 5px;
+}
+
+.choice-by {
+  padding: 30px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+.choice-by__dropdown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.choice-by__input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.choice-by__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.choice-by__button {
+  padding: 5px;
+}
+
+.main-table {
+  width: 100%;
+  border: 1px solid grey;
+}
+
+.table-title__item {
+  border: 1px solid grey;
+  text-align: center;
+}
+
+.table-descr__item {
+  padding: 10px;
+  border: 1px solid grey;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

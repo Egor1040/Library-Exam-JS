@@ -1,0 +1,58 @@
+.all-books {
+    border-bottom: 1px solid #c0c0c08b;
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #1b919a;
+    }
+    &__button {
+        width: 120px;
+        padding: 5px;
+    }
+}
+
+.choice-by {
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    &__dropdown {
+        display: flex;
+        gap: 10px;
+    }
+    &__input {
+        display: flex;
+        gap: 10px;
+    }
+    &__label {
+        display: flex;
+        align-items: center;
+    }
+    &__button {
+        padding: 5px;
+    }
+}
+
+.main-table {
+    width: 100%;
+    border: 1px solid grey;
+}
+
+.table-title {
+    &__item {
+        border: 1px solid grey;
+        text-align:center;
+    }
+}
+
+.table-descr {
+    &__item {
+        padding: 10px;
+        border: 1px solid grey;
+        text-align:center;
+    }
+}
