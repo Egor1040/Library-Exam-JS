@@ -221,4 +221,57 @@ a {
 .item-icon img {
   width: 100%;
   height: 100%;
+}
+
+.edit-modal {
+  display: none;
+  background-color: rgba(84, 84, 84, 0.337254902);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal-edit {
+  display: none;
+  padding: 50px;
+  border-radius: 10px;
+  position: absolute;
+  background-color: #f6f6f6;
+  width: 500px;
+}
+.modal-edit__title {
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+.modal-edit__close {
+  cursor: pointer;
+  position: absolute;
+  left: 92%;
+  top: 5%;
+  z-index: 1;
+  background: none;
+  border: none;
+  font-size: large;
+}
+.modal-edit__add {
+  cursor: pointer;
+  background-color: #e1e1e1;
+  border: 1px solid silver;
+  border-radius: 10px;
+  width: 100%;
+  height: 30px;
+}
+.modal-edit__add:hover {
+  background-color: silver;
 }/*# sourceMappingURL=style.css.map */

@@ -133,3 +133,52 @@
         height: 100%;
     }
 }
+
+.edit-modal {
+    display: none;
+    background-color: #54545456;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-edit {
+    display: none;
+    padding: 50px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: #f6f6f6;
+    width: 500px;
+    &__title {
+        display: block;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        padding-bottom: 20px;
+    }
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        left: 92%;
+        top: 5%;
+        z-index: 1;
+        background: none;
+        border: none;
+        font-size: large;
+    }
+    &__add {
+        cursor: pointer;
+        background-color: #e1e1e1;
+        border: 1px solid silver;
+        border-radius: 10px;
+        width: 100%;
+        height: 30px;
+        &:hover {
+            background-color: silver;
+        }
+    }
+}

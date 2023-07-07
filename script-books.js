@@ -35,19 +35,30 @@ class Model {
         let pageValue = document.querySelector('#addPage').value.trim();
         let valueBooks = document.querySelector('#addValueBooks').value.trim();
 
-        id > 0 && id < 1000 ? agree = true : agree = false;
-        name.match(/^[а-яА-Яa-zA-Z]{5,30}$/) ? agree = true : agree = false;
-        nameAuthor.match(/^[а-яА-Я]{5,30}$/) ? agree = true : agree = false;
-        year > 1900 || year <= 2023 ? agree = true : agree = false;
-        namePublish.match(/^[а-яА-Я]{5,30}$/) ? agree = true : agree = false;
-        pageValue > 0 ? agree = true : agree = false;
-        valueBooks > 0 ? agree = true : agree = false;
+        const conditions = [
+            { check: Number(id) > 0 },
+            { check: name },
+            { check: nameAuthor },
+            { check: Number(year) > 0 },
+            { check: namePublish },
+            { check: Number(pageValue) > 0 },
+            { check: Number(valueBooks) > 0 }
+        ];
+
+        let isValid = true;
+
+        for (const condition of conditions) {
+            if (!condition.check) {
+                isValid = false;   
+            }
+        }
+        agree = isValid;
 
         const obj = {
-            id: id,
+            id: Number(id),
             name: name,
             nameAuthor: nameAuthor,
-            year: year,
+            year: Number(year),
             publishHouse: namePublish,
             page: pageValue,
             value: valueBooks
@@ -60,10 +71,47 @@ class Model {
         }
     }
 
+    editBook(id) {
+        let agree = false;
+
+        const arr = JSON.parse(localStorage.getItem('arrBooks'));
+        let editId = document.querySelector('#editId').value.trim();
+        let name = document.querySelector('#editName').value;
+        let nameAuthor = document.querySelector('#editAuthor').value;
+        let year = document.querySelector('#editYear').value.trim();
+        let namePublish = document.querySelector('#editNamePublish').value;
+        let pageValue = document.querySelector('#editPage').value.trim();
+        let valueBooks = document.querySelector('#editValueBooks').value.trim();
+
+        const conditions = [
+            { check: Number(editId) > 0, value: Number(editId), key: 'id' },
+            { check: name, value: name, key: 'name' },
+            { check: nameAuthor, value: nameAuthor, key: 'nameAuthor' },
+            { check: Number(year) > 0, value: year, key: 'year' },
+            { check: namePublish, value: namePublish, key: 'publishHouse' },
+            { check: Number(pageValue) > 0, value: pageValue, key: 'page' },
+            { check: Number(valueBooks) > 0, value: valueBooks, key: 'value' }
+        ];
+          
+        let isValid = true;
+          
+        for (const condition of conditions) {
+            if (condition.check) {
+                arr[id][condition.key] = condition.value;
+            } else {
+                isValid = false;
+            }
+        }
+
+        agree = isValid;
+        if(agree) {
+            localStorage.setItem('arrBooks', JSON.stringify(arr));
+        }
+    }
+
     deleteBook(id) {
         const arr = JSON.parse(localStorage.getItem('arrBooks'));
         arr.splice(id, 1);
-        console.log(arr);
         localStorage.setItem('arrBooks', JSON.stringify(arr));
     }
 }
@@ -76,7 +124,7 @@ class View {
     renderTableItem(arrData) {
         arrData.forEach((elem,index) => {
             let html = `<tr class="table-descr">
-                            <td class="table-descr__item">${elem.id}</td>
+                            <td class="table-descr__item" style="max-width: 56.6px">${elem.id}</td>
                             <td class="table-descr__item">${elem.name}</td>
                             <td class="table-descr__item">${elem.nameAuthor}</td>
                             <td class="table-descr__item">${elem.year}</td>
@@ -84,7 +132,7 @@ class View {
                             <td class="table-descr__item">${elem.page}</td>
                             <td class="table-descr__item">${elem.value}</td>
                             <td class="table-descr__item table-descr__item_img">
-                                <div class="item-icon" data-id="${index}">
+                                <div class="item-icon item-icon_edit" data-id="${index}">
                                     <img src="./img/icon/pencil.png">
                                 </div>
                             </td>
@@ -109,9 +157,10 @@ class Controller {
         this.view = new View();
     }
 
-    manipulateModal(even) {
+    manipulateAddModal(even) {
         let modal = document.querySelector('.add-modal');
         let modalWindow = document.querySelector('.modal-window');
+
         if(even.target.matches('.all-item__button')) {
             if(modal.style.display = "none") {
                 modal.style.display = "flex";
@@ -127,30 +176,103 @@ class Controller {
 
     }
 
+    manipulateEditModal(even) {
+        let modal = document.querySelector('.edit-modal');
+        let modalWindow = document.querySelector('.modal-edit');
+
+        if(even.target.closest('.item-icon_edit')) {
+            if(modal.style.display = "none") {
+                modal.style.display = "flex";
+                modalWindow.style.display = "block";
+            }
+        }
+        if(even.target.closest('.modal-edit__close')) {
+            if(modal.style.display = "flex") {
+                modal.style.display = "none";
+                modalWindow.style.display = "none";
+            }
+        }
+    }
+
     addElement(even) {
         if(even.target.matches('.modal-window__add')) {
             this.model.addBook();
             this.view.mainContainer.innerHTML = '';
-            const arr = JSON.parse(localStorage.getItem('arrBooks'));
+            const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
         }
+    }
+
+    editElement(even) {
+        if(even.target.closest('.item-icon_edit')) {
+            let idEl = even.target.parentElement.dataset.id;
+            console.log(idEl) 
+            document.querySelector('.modal-edit__add').setAttribute('data-id', idEl) 
+        }
+
+        if(even.target.matches('.modal-edit__add')) {
+            console.log(even.target.dataset.id)
+            this.model.editBook(even.target.dataset.id);
+            this.view.mainContainer.innerHTML = '';
+            const arr = this.model.getLocalArr();
+            this.view.renderTableItem(arr);
+        } 
     }
 
     deleteElement(even) {
         if(even.target.closest('.item-icon_del')) {
             this.model.deleteBook(even.target.parentElement.dataset.id);
             this.view.mainContainer.innerHTML = '';
-            const arr = JSON.parse(localStorage.getItem('arrBooks'));
+            const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
+        }
+    }
+
+    findElement(even) {
+        if (even.target.matches('.choice-by__button')) {
+            let searchVal = document.querySelector('.choice-by__text').value.trim();
+            const arr = this.model.getLocalArr();
+            const tempArr = [];
+
+            if (searchVal !== '') {
+                arr.forEach(function(elem) {
+                    let n = elem.name;
+                    let auth = elem.nameAuthor;
+                    let publ = elem.publishHouse;
+
+                    if(n.indexOf(searchVal) !== -1 || auth.indexOf(searchVal) !== -1 || publ.indexOf(searchVal) !== -1) {
+                        let obj = {
+                            id: elem.id,
+                            name: elem.name,
+                            nameAuthor: elem.nameAuthor,
+                            year: elem.year,
+                            publishHouse: elem.publishHouse,
+                            page: elem.page,
+                            value: elem.value
+                        }
+                        
+                        tempArr.push(obj)
+                    }
+                });
+
+                this.view.mainContainer.innerHTML = '';
+                this.view.renderTableItem(tempArr);
+            } else if (searchVal === '') {
+                const arr = this.model.getLocalArr();
+                this.view.renderTableItem(arr);
+            }
         }
     }
 
     async init() {
         this.model.setLocalArr();
         this.view.renderBooksItem(this.model.dataBooks);
-        document.body.addEventListener('click', this.manipulateModal.bind(this));
+        document.body.addEventListener('click', this.manipulateAddModal.bind(this));
+        document.body.addEventListener('click', this.manipulateEditModal.bind(this));
+        document.body.addEventListener('click', this.editElement.bind(this))
         document.body.addEventListener('click', this.deleteElement.bind(this));
         document.querySelector('.modal-window__add').addEventListener('click', this.addElement.bind(this));
+        document.body.addEventListener('click', this.findElement.bind(this));
     }
 }
 
