@@ -114,6 +114,49 @@ class Model {
         arr.splice(id, 1);
         localStorage.setItem('arrBooks', JSON.stringify(arr));
     }
+
+    sortDataStr(val,paramSort,keyData,dataArr,container,renderFunc) {
+        if(val === paramSort) {
+            const arr = dataArr;
+            arr.sort((a, b) => {
+                let nameA = a[keyData].toUpperCase();
+                let nameB = b[keyData].toUpperCase();
+    
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+    
+                return 0;
+            })
+
+            container.innerHTML = '';
+            renderFunc.renderTableItem(arr);
+        }
+    }
+    sortDataNumber(val,paramSort,keyData,dataArr,container,renderFunc) {
+        if(val === paramSort) {
+            const arr = dataArr;
+            arr.sort((a, b) => {
+                let nameA = a[keyData];
+                let nameB = b[keyData];
+    
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+    
+                return 0;
+            })
+
+            container.innerHTML = '';
+            renderFunc.renderTableItem(arr);
+        }
+    }
 }
 
 class View {
@@ -206,12 +249,10 @@ class Controller {
     editElement(even) {
         if(even.target.closest('.item-icon_edit')) {
             let idEl = even.target.parentElement.dataset.id;
-            console.log(idEl) 
             document.querySelector('.modal-edit__add').setAttribute('data-id', idEl) 
         }
 
         if(even.target.matches('.modal-edit__add')) {
-            console.log(even.target.dataset.id)
             this.model.editBook(even.target.dataset.id);
             this.view.mainContainer.innerHTML = '';
             const arr = this.model.getLocalArr();
@@ -229,7 +270,7 @@ class Controller {
     }
 
     findElement(even) {
-        if (even.target.matches('.choice-by__button')) {
+        if (even.target.matches('#search')) {
             let searchVal = document.querySelector('.choice-by__text').value.trim();
             const arr = this.model.getLocalArr();
             const tempArr = [];
@@ -250,7 +291,7 @@ class Controller {
                             page: elem.page,
                             value: elem.value
                         }
-                        
+
                         tempArr.push(obj)
                     }
                 });
@@ -259,8 +300,20 @@ class Controller {
                 this.view.renderTableItem(tempArr);
             } else if (searchVal === '') {
                 const arr = this.model.getLocalArr();
+                this.view.mainContainer.innerHTML = '';
                 this.view.renderTableItem(arr);
             }
+        }
+    }
+
+    sortElement(even) {
+        let target = even.target;
+        if(target.matches('#sort')) {
+            let val = document.querySelector('#sortBy').value;
+
+            this.model.sortDataStr(val, 'name', 'name',this.model.getLocalArr(),this.view.mainContainer,this.view);
+            this.model.sortDataStr(val, 'nameAuthor', 'nameAuthor',this.model.getLocalArr(),this.view.mainContainer,this.view);
+            this.model.sortDataNumber(val, 'valueEl', 'value',this.model.getLocalArr(),this.view.mainContainer,this.view);
         }
     }
 
@@ -269,10 +322,11 @@ class Controller {
         this.view.renderBooksItem(this.model.dataBooks);
         document.body.addEventListener('click', this.manipulateAddModal.bind(this));
         document.body.addEventListener('click', this.manipulateEditModal.bind(this));
+        document.querySelector('.modal-window__add').addEventListener('click', this.addElement.bind(this));
         document.body.addEventListener('click', this.editElement.bind(this))
         document.body.addEventListener('click', this.deleteElement.bind(this));
-        document.querySelector('.modal-window__add').addEventListener('click', this.addElement.bind(this));
         document.body.addEventListener('click', this.findElement.bind(this));
+        document.body.addEventListener('click', this.sortElement.bind(this));
     }
 }
 
