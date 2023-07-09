@@ -27,123 +27,142 @@
         
                         <a class="library-title__items" href="./index-statistics.html" id="statistics"><span>Статистика</span></a>
                     </div>
+                    <div class="burger-menu">
+                        <div class="menu-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="./index-books.html">Книги</a></li>
+                                    <li><a href="./index-visitors.html">Відвідувачі</a></li>
+                                    <li><a href="./index-cards.html">Картки</a></li>
+                                    <li><a href="./index-statistics.html">Статистика</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="main">
-        <div class="container">
-            <div class="all-item">
-                <span class="all-item__title">ВСІ КНИГИ:</span>
-                <button class="all-item__button">Нова книга</button>
-                <div class="add-modal">
-                    <div class="modal-window">
-                        <button class="modal-window__close">X</button>
-                        <span class="modal-window__title">Додати книгу:</span>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Ід:</p>
-                            <input id="addId" class="add-descr__item" placeholder="Тільки цифри">
+        <div class="main">
+            <div class="container">
+                <div class="all-item">
+                    <span class="all-item__title">ВСІ КНИГИ:</span>
+                    <button class="all-item__button">Нова книга</button>
+                    <div class="add-modal">
+                        <div class="modal-window">
+                            <button class="modal-window__close">X</button>
+                            <span class="modal-window__title">Додати книгу:</span>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Ід:</p>
+                                <input id="addId" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Імя:</p>
+                                <input id="addName" type="text" class="add-descr__item" placeholder="Великі та малі літери(латинські або кирилиця)">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Імя автора:</p>
+                                <input id="addAuthor" type="text" class="add-descr__item" placeholder="Великі та малі літери(кирилиця)">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Рік:</p>
+                                <input id="addYear" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Назва видавництва:</p>
+                                <input id="addNamePublish" type="text" class="add-descr__item" placeholder="Великі та малі літери і цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">К-сть сторінок:</p>
+                                <input id="addPage" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">К-сть екземплярів:</p>
+                                <input id="addValueBooks" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <button type="submit" class="modal-window__add">Зберегти</button>
                         </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Імя:</p>
-                            <input id="addName" type="text" class="add-descr__item" placeholder="Великі та малі літери(латинські або кирилиця)">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Імя автора:</p>
-                            <input id="addAuthor" type="text" class="add-descr__item" placeholder="Великі та малі літери(кирилиця)">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Рік:</p>
-                            <input id="addYear" type="text" class="add-descr__item" placeholder="Тільки цифри">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Назва видавництва:</p>
-                            <input id="addNamePublish" type="text" class="add-descr__item" placeholder="Великі та малі літери і цифри">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">К-сть сторінок:</p>
-                            <input id="addPage" type="text" class="add-descr__item" placeholder="Тільки цифри">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">К-сть екземплярів:</p>
-                            <input id="addValueBooks" type="text" class="add-descr__item" placeholder="Тільки цифри">
-                        </div>
-                        <button type="submit" class="modal-window__add">Зберегти</button>
                     </div>
                 </div>
-            </div>
-            <div class="sort">
-                <div class="choice-by">
-                    <div class="choice-by__dropdown">
-                        <p class="choice-by__label">Сортувати по:</p>
-                        <select class="choice-by__select" name="text" id="sortBy">
-                            <option value="name">Назві</option>
-                            <option value="nameAuthor">Імені Автора</option>
-                            <option value="valueEl">К-сті екземплярів</option>
-                        </select>
-                        <button id="sort" class="choice-by__button">Сортувати</button>
-                    </div>
-
-                    <div class="choice-by__input">
-                        <p class="choice-by__label">Шукати:</p>
-                        <input class="choice-by__text" type="text" title="Назва книги,імя автора або видавництва">
-                        <button id="search" class="choice-by__button">Шукати</button>
+                <div class="sort">
+                    <div class="choice-by">
+                        <div class="choice-by__dropdown">
+                            <p class="choice-by__label">Сортувати по:</p>
+                            <select class="choice-by__select" name="text" id="sortBy">
+                                <option value="name">Назві</option>
+                                <option value="nameAuthor">Імені Автора</option>
+                                <option value="valueEl">К-сті екземплярів</option>
+                            </select>
+                            <button id="sort" class="choice-by__button">Сортувати</button>
+                        </div>
+    
+                        <div class="choice-by__input">
+                            <p class="choice-by__label">Шукати:</p>
+                            <input class="choice-by__text" type="text" title="Назва книги,імя автора або видавництва">
+                            <button id="search" class="choice-by__button">Шукати</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="table">
-                <table class="main-table">
-                    <thead class="table-title">
-                        <th class="table-title__item">Ід</th>
-                        <th class="table-title__item">Назва</th> 
-                        <th class="table-title__item">Імя автора</th>
-                        <th class="table-title__item">Рік видавництва</th>
-                        <th class="table-title__item">Назва видавництва</th>
-                        <th class="table-title__item">К-сть сторінок</th>
-                        <th class="table-title__item">К-сть примірників у бібліотеці</th>
-                        <th class="table-title__item">Змінити</th>
-                        <th class="table-title__item">Видалити</th>
-                    </thead>
-
-                    <tbody class="table-body">
-            
-                    </tbody>
-                </table>
-
-                <div class="edit-modal">
-                    <div class="modal-edit">
-                        <button class="modal-edit__close">X</button>
-                        <span class="modal-edit__title">Редагувати книгу:</span>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Ід:</p>
-                            <input id="editId" class="add-descr__item" placeholder="Тільки цифри">
+                <div class="table">
+                    <table class="main-table">
+                        <thead class="table-title">
+                            <tr class="table-title__main">
+                                <th class="table-title__item">Ід</th>
+                                <th class="table-title__item">Назва</th> 
+                                <th class="table-title__item">Імя автора</th>
+                                <th class="table-title__item">Рік видавництва</th>
+                                <th class="table-title__item">Назва видавництва</th>
+                                <th class="table-title__item">К-сть сторінок</th>
+                                <th class="table-title__item">К-сть примірників у бібліотеці</th>
+                                <th class="table-title__item">Змінити</th>
+                                <th class="table-title__item">Видалити</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody class="table-body">
+                
+                        </tbody>
+                    </table>
+    
+                    <div class="edit-modal">
+                        <div class="modal-edit">
+                            <button class="modal-edit__close">X</button>
+                            <span class="modal-edit__title">Редагувати книгу:</span>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Ід:</p>
+                                <input id="editId" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Імя:</p>
+                                <input id="editName" type="text" class="add-descr__item" placeholder="Великі та малі літери(латинські або кирилиця)">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Імя автора:</p>
+                                <input id="editAuthor" type="text" class="add-descr__item" placeholder="Великі та малі літери(кирилиця)">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Рік:</p>
+                                <input id="editYear" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Назва видавництва:</p>
+                                <input id="editNamePublish" type="text" class="add-descr__item" placeholder="Великі та малі літери і цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">К-сть сторінок:</p>
+                                <input id="editPage" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">К-сть екземплярів:</p>
+                                <input id="editValueBooks" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <button type="submit" class="modal-edit__add">Зберегти</button>
                         </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Імя:</p>
-                            <input id="editName" type="text" class="add-descr__item" placeholder="Великі та малі літери(латинські або кирилиця)">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Імя автора:</p>
-                            <input id="editAuthor" type="text" class="add-descr__item" placeholder="Великі та малі літери(кирилиця)">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Рік:</p>
-                            <input id="editYear" type="text" class="add-descr__item" placeholder="Тільки цифри">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Назва видавництва:</p>
-                            <input id="editNamePublish" type="text" class="add-descr__item" placeholder="Великі та малі літери і цифри">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">К-сть сторінок:</p>
-                            <input id="editPage" type="text" class="add-descr__item" placeholder="Тільки цифри">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">К-сть екземплярів:</p>
-                            <input id="editValueBooks" type="text" class="add-descr__item" placeholder="Тільки цифри">
-                        </div>
-                        <button type="submit" class="modal-edit__add">Зберегти</button>
                     </div>
                 </div>
             </div>

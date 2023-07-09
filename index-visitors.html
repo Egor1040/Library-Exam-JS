@@ -27,68 +27,85 @@
         
                         <a class="library-title__items" href="./index-statistics.html" id="statistics"><span>Статистика</span></a>
                     </div>
+                    <div class="burger-menu">
+                        <div class="menu-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="./index-books.html">Книги</a></li>
+                                    <li><a href="./index-visitors.html">Відвідувачі</a></li>
+                                    <li><a href="./index-cards.html">Картки</a></li>
+                                    <li><a href="./index-statistics.html">Статистика</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="main">
-        <div class="container">
-            <div class="all-item">
-                <span class="all-item__title">ВСІ ВІДВІДУВАЧІ:</span>
-                <button class="all-item__button">Новий відвідувач</button>
-                <div class="add-modal">
-                    <div class="modal-window">
-                        <button class="modal-window__close">X</button>
-                        <span class="modal-window__title">Додати відвідувача:</span>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Ід:</p>
-                            <input type="text" class="add-descr__item">
+        <div class="main">
+            <div class="container">
+                <div class="all-item">
+                    <span class="all-item__title">ВСІ ВІДВІДУВАЧІ:</span>
+                    <button class="all-item__button">Новий відвідувач</button>
+                    <div class="add-modal">
+                        <div class="modal-window">
+                            <button class="modal-window__close">X</button>
+                            <span class="modal-window__title">Додати відвідувача:</span>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Ід:</p>
+                                <input type="text" class="add-descr__item">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Імя та Прізвище:</p>
+                                <input type="text" class="add-descr__item">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Номер телефону:</p>
+                                <input type="text" class="add-descr__item">
+                            </div>
+                            <button class="modal-window__add">Зберегти</button>
                         </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Імя та Прізвище:</p>
-                            <input type="text" class="add-descr__item">
-                        </div>
-                        <div class="add-descr">
-                            <p class="add-descr__title">Номер телефону:</p>
-                            <input type="text" class="add-descr__item">
-                        </div>
-                        <button class="modal-window__add">Зберегти</button>
                     </div>
                 </div>
-            </div>
-            <div class="sort">
-                <div class="choice-by">
-                    <div class="choice-by__dropdown">
-                        <p class="choice-by__label">Сортувати по:</p>
-                        <select class="choice-by__select" name="text" id="sortBy">
-                            <option value="name">Ід</option>
-                            <option value="nameAuthor">Імені</option>
-                        </select>
-                        <button class="choice-by__button">Сортувати</button>
-                    </div>
-
-                    <div class="choice-by__input">
-                        <p class="choice-by__label">Шукати:</p>
-                        <input class="choice-by__text" type="text">
-                        <button class="choice-by__button">Шукати</button>
+                <div class="sort">
+                    <div class="choice-by">
+                        <div class="choice-by__dropdown">
+                            <p class="choice-by__label">Сортувати по:</p>
+                            <select class="choice-by__select" name="text" id="sortBy">
+                                <option value="name">Ід</option>
+                                <option value="nameAuthor">Імені</option>
+                            </select>
+                            <button class="choice-by__button">Сортувати</button>
+                        </div>
+    
+                        <div class="choice-by__input">
+                            <p class="choice-by__label">Шукати:</p>
+                            <input class="choice-by__text" type="text">
+                            <button class="choice-by__button">Шукати</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="table">
-                <table class="main-table">
-                    <thead class="table-title">
-                        <th class="table-title__item" style="width: 10%;">Ід</th>
-                        <th class="table-title__item" style="width: 40%;">ПІБ</th> 
-                        <th class="table-title__item" style="width: 40%;">Номер телефону</th>
-                        <th class="table-title__item" style="width: 10%;">Змінити</th>
-                    </thead>
-
-                    <tbody class="table-body">
-            
-                    </tbody>
-                </table>
-        </div>   
+                <div class="table">
+                    <table class="main-table">
+                        <thead class="table-title">
+                            <th class="table-title__item" style="width: 10%;">Ід</th>
+                            <th class="table-title__item" style="width: 40%;">ПІБ</th> 
+                            <th class="table-title__item" style="width: 40%;">Номер телефону</th>
+                            <th class="table-title__item" style="width: 10%;">Змінити</th>
+                        </thead>
+    
+                        <tbody class="table-body">
+                
+                        </tbody>
+                    </table>
+            </div>   
+        </div>
     </div>
 
     <script src="./script-visitors.js"></script>

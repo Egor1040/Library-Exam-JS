@@ -167,7 +167,7 @@ class View {
     renderTableItem(arrData) {
         arrData.forEach((elem,index) => {
             let html = `<tr class="table-descr">
-                            <td class="table-descr__item" style="max-width: 56.6px">${elem.id}</td>
+                            <td class="table-descr__item">${elem.id}</td>
                             <td class="table-descr__item">${elem.name}</td>
                             <td class="table-descr__item">${elem.nameAuthor}</td>
                             <td class="table-descr__item">${elem.year}</td>
@@ -198,6 +198,19 @@ class Controller {
     constructor() {
         this.model = new Model();
         this.view = new View();
+    }
+
+    openCloseBtnMenu(even) {
+        if(even.target.matches('.menu-btn')) {
+            let menu = document.querySelector('.menu');
+            let span = document.querySelectorAll('.menu-btn span');
+
+            document.body.style.overflow = "hidden"
+            menu.classList.toggle('active');
+            span.forEach(function(el) {
+                el.classList.toggle('menu-btn__active')
+            })
+        }
     }
 
     manipulateAddModal(even) {
@@ -320,6 +333,7 @@ class Controller {
     async init() {
         this.model.setLocalArr();
         this.view.renderBooksItem(this.model.dataBooks);
+        document.body.addEventListener('click', this.openCloseBtnMenu.bind(this))
         document.body.addEventListener('click', this.manipulateAddModal.bind(this));
         document.body.addEventListener('click', this.manipulateEditModal.bind(this));
         document.querySelector('.modal-window__add').addEventListener('click', this.addElement.bind(this));

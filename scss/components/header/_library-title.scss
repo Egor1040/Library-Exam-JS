@@ -1,4 +1,5 @@
 .library-background {
+    position: relative;
     height: 50px;
     background-color: #404040;
 }
@@ -9,13 +10,89 @@
     &__items {
         cursor: pointer;
         padding: 10px 20px;
-        text-align: center;
-        min-width: 150px;
+        @include flex($jc: center, $ai: center);
+        border-bottom: 3px solid #404040;
         border-left: 1px solid #c0c0c078;
-        font-size: 25px;
         color: #ffffff;
+        @include adaptive-value("font-size", 25, 14, 1);
+        @include adaptive-value("width", 185, 125, 1);
         &:hover {
             border-bottom: 3px solid #1b919a;
         }
+        @media(max-width: 800px) {
+            display: none;
+        }
+    }
+}
+
+.burger-menu {
+    visibility: hidden;
+    position: absolute;
+    top: 0px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media(max-width: 800px) {
+        visibility: visible;
+    }
+}
+
+.menu-btn {
+    cursor: pointer;
+	width: 30px;
+	height: 30px;
+	position: relative;
+	z-index:2;
+	overflow: hidden;
+    & span {
+        width: 30px;
+        height: 2px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        transition: all 0.5s;
+    }
+    &__active {
+        border: 1px solid #1b919a;
+    }
+    & span:nth-of-type(2) {
+        top: calc(50% - 5px);
+    }
+    & span:nth-of-type(3) {
+        top: calc(50% + 5px);
+    }
+}
+
+.menu {
+    @include flex($jc: center, $ai: center);
+    position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+    background: #404040;
+	transform: translateX(-100%);
+	transition: transform 0.5s; 
+    & li {
+        list-style-type: none;
+        font-size: 40px;
+        & a:hover {
+            color: #1b919a;
+        }
+    }
+}
+.menu.active {
+	transform: translateX(0);
+    @include flex($jc: center, $ai: center);
+    & ul {
+        font-size: 40px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
     }
 }
