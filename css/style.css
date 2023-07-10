@@ -69,6 +69,8 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   border-bottom: 3px solid #404040;
   border-left: 1px solid rgba(192, 192, 192, 0.4705882353);
   color: #ffffff;
@@ -160,6 +162,8 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   position: fixed;
   top: 0;
   left: 0;
@@ -198,6 +202,8 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 .menu.active ul {
   font-size: 40px;
@@ -227,6 +233,8 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 .all-item__title {
   font-size: 20px;
@@ -340,9 +348,6 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 20px;
@@ -363,12 +368,18 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   text-align: right;
   width: 120px;
   font-size: 14px;
@@ -429,6 +440,15 @@ a {
     display: grid;
     grid-template-columns: 1fr;
   }
+}
+
+.main-title__title {
+  padding: 10px 0;
+  color: #1b919a;
+}
+.main-title__descr {
+  padding: 10px 0;
+  color: #1b919a;
 }
 
 .table-title {

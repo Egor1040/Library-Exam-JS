@@ -1,8 +1,9 @@
-@mixin flex($jc: center, $ai: center, $fd: row) {
+@mixin flex($jc: center, $ai: center, $fd: row, $fw: wrap) {
     display: flex;
     justify-content: $jc;
     align-items: $ai;
     flex-direction: $fd;
+    flex-wrap: $fw;
 }
 
 $maxWidth: 1920;

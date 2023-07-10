@@ -116,6 +116,17 @@
     }
 }
 
+.main-title {
+    &__title {
+        padding: 10px 0;
+        color: #1b919a;
+    }
+    &__descr {
+        padding: 10px 0;
+        color: #1b919a;
+    }
+}
+
 .table-title {
     @include adaptive-value("font-size", 16, 14, 1);
     &__main {

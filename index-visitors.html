@@ -59,15 +59,15 @@
                             <span class="modal-window__title">Додати відвідувача:</span>
                             <div class="add-descr">
                                 <p class="add-descr__title">Ід:</p>
-                                <input type="text" class="add-descr__item">
+                                <input id="addId" type="text" class="add-descr__item">
                             </div>
                             <div class="add-descr">
                                 <p class="add-descr__title">Імя та Прізвище:</p>
-                                <input type="text" class="add-descr__item">
+                                <input id="addFullName" type="text" class="add-descr__item">
                             </div>
                             <div class="add-descr">
                                 <p class="add-descr__title">Номер телефону:</p>
-                                <input type="text" class="add-descr__item">
+                                <input id="addPhone" type="text" class="add-descr__item">
                             </div>
                             <button class="modal-window__add">Зберегти</button>
                         </div>
@@ -104,10 +104,32 @@
                 
                         </tbody>
                     </table>
+
+                    <div class="edit-modal">
+                        <div class="modal-edit">
+                            <button class="modal-edit__close">X</button>
+                            <span class="modal-edit__title">Додати відвідувача:</span>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Ід:</p>
+                                <input id="addId" type="text" class="add-descr__item" placeholder="Тільки цифри">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Імя та Прізвище:</p>
+                                <input id="addFullName" type="text" class="add-descr__item" placeholder="Прізвище та Імя(Кирилицею)">
+                            </div>
+                            <div class="add-descr">
+                                <p class="add-descr__title">Номер телефону:</p>
+                                <input id="addPhone" type="text" class="add-descr__item" placeholder="Номер телефону в форматі 38099*****">
+                            </div>
+                            <button class="modal-edit__add">Зберегти</button>
+                        </div>
+                    </div>
             </div>   
         </div>
     </div>
 
-    <script src="./script-visitors.js"></script>
+    <script src="./js/burger-menu.js"></script>
+    <script src="./js/manipulate-modal.js"></script>
+    <script src="./js/script-visitors.js"></script>
 </body>
 </html>
