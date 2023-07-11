@@ -8,5 +8,45 @@
         "id": 2,
         "fullName": "Петров Олександр",
         "phoneNumber": "0984567890"
+    },
+    {
+        "id": 3,
+        "fullName": "Пономаренко Іван",
+        "phoneNumber": "0635672456"
+    },
+    {
+        "id": 4,
+        "fullName": "Зінченко Віталій",
+        "phoneNumber": "0678887890"
+    },
+    {
+        "id": 5,
+        "fullName": "Молька Федір",
+        "phoneNumber": "0997767890"
+    },
+    {
+        "id": 6,
+        "fullName": "Гунченко Олексій",
+        "phoneNumber": "0954589890"
+    },
+    {
+        "id": 7,
+        "fullName": "Немудрий Петька",
+        "phoneNumber": "0984567890"
+    },
+    {
+        "id": 8,
+        "fullName": "Книш Віталій",
+        "phoneNumber": "0984567890"
+    },
+    {
+        "id": 9,
+        "fullName": "Грибий Дмитро",
+        "phoneNumber": "0663567890"
+    },
+    {
+        "id": 10,
+        "fullName": "Ангуш Микола",
+        "phoneNumber": "0989867890"
     }
 ]

@@ -34,11 +34,12 @@ class Model {
         let namePublish = document.querySelector('#addNamePublish').value;
         let pageValue = document.querySelector('#addPage').value.trim();
         let valueBooks = document.querySelector('#addValueBooks').value.trim();
+        let regName = /[а-я А-Яі]{5,40}/i;
 
         const conditions = [
             { check: Number(id) > 0 },
-            { check: name },
-            { check: nameAuthor },
+            { check: regName.test(name) },
+            { check: regName.test(nameAuthor) },
             { check: Number(year) > 0 },
             { check: namePublish },
             { check: Number(pageValue) > 0 },
@@ -82,11 +83,12 @@ class Model {
         let namePublish = document.querySelector('#editNamePublish').value;
         let pageValue = document.querySelector('#editPage').value.trim();
         let valueBooks = document.querySelector('#editValueBooks').value.trim();
+        let regName = /[а-я А-Яі]{5,40}/i;
 
         const conditions = [
             { check: Number(editId) > 0, value: Number(editId), key: 'id' },
-            { check: name, value: name, key: 'name' },
-            { check: nameAuthor, value: nameAuthor, key: 'nameAuthor' },
+            { check: regName.test(name), value: name, key: 'name' },
+            { check: regName.test(nameAuthor), value: nameAuthor, key: 'nameAuthor' },
             { check: Number(year) > 0, value: year, key: 'year' },
             { check: namePublish, value: namePublish, key: 'publishHouse' },
             { check: Number(pageValue) > 0, value: pageValue, key: 'page' },
