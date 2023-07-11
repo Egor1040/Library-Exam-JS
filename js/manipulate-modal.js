@@ -9,12 +9,14 @@ function manipulateAddModal(even) {
 
     if(even.target.matches('.all-item__button')) {
         if(modal.style.display = "none") {
+            document.body.style.overflow = "hidden";
             modal.style.display = "flex";
             modalWindow.style.display = "block";
         }
     }
     if(even.target.matches('.modal-window__close')) {
         if(modal.style.display = "flex") {
+            document.body.style.overflow = "visible";
             modal.style.display = "none";
             modalWindow.style.display = "none";
         }
