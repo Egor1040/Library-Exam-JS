@@ -218,6 +218,7 @@ a {
 }
 
 .all-item {
+  gap: 20px;
   border-bottom: 1px solid rgba(192, 192, 192, 0.5450980392);
   padding: 30px 0;
   display: -webkit-box;

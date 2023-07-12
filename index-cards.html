@@ -59,11 +59,15 @@
                             <span class="modal-window__title">Додати картку:</span>
                             <div class="add-descr">
                                 <p class="add-descr__title">Відвідувач:</p>
-                                <select class="add-descr__item">
+                                <select class="add-descr__item add-descr__item_visitor">
+
+                                </select>
                             </div>
                             <div class="add-descr">
                                 <p class="add-descr__title">Книга:</p>
-                                <select class="add-descr__item">
+                                <select class="add-descr__item add-descr__item_book">
+                                    
+                                </select>
                             </div>
                             <button class="modal-window__add">Зберегти</button>
                         </div>
@@ -89,11 +93,13 @@
                 <div class="table">
                     <table class="main-table">
                         <thead class="table-title">
-                            <th class="table-title__item" style="width: 5%;">Ід</th>
-                            <th class="table-title__item" style="width: 30%;">Відвідувач</th> 
-                            <th class="table-title__item" style="width: 30%;">Книга</th>
-                            <th class="table-title__item" style="width: 15%;">Дата взяття</th>
-                            <th class="table-title__item" style="width: 15%;">Дата повернення</th>
+                            <tr class="table-title__main">
+                                <th class="table-title__item">Ід</th>
+                                <th class="table-title__item">Відвідувач</th> 
+                                <th class="table-title__item">Книга</th>
+                                <th class="table-title__item">Дата видачі</th>
+                                <th class="table-title__item">Дата повернення</th>
+                            </tr>
                         </thead>
     
                         <tbody class="table-body">
@@ -105,6 +111,7 @@
     </div>
 
     <script src="./js/burger-menu.js"></script>
+    <script src="./js/manipulate-modal.js"></script>
     <script src="./js/script-cards.js"></script>
 </body>
 </html>

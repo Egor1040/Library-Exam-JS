@@ -3,20 +3,6 @@
 class Model {
     constructor() {
         this.apiBooks = 'data-books.json';
-        this.dataBooks = this.getLocalArr();
-    }
-
-    async setLocalArr() {
-        if(!localStorage.getItem('arrBooks')) {
-            try {
-                const resp = await fetch(this.apiBooks);
-                const arr = await resp.json();
-                localStorage.setItem('arrBooks', JSON.stringify(arr));
-                this.data = arr;
-            } catch (error) {
-                console.error(error);
-            }
-        }
     }
 
     getLocalArr() {
@@ -283,9 +269,8 @@ class Controller {
     }
 
     async init() {
-        this.model.setLocalArr();
-        this.view.renderBooksItem(this.model.dataBooks);
-        document.querySelector('.modal-window__add').addEventListener('click', this.addElement.bind(this));
+        this.view.renderBooksItem(this.model.getLocalArr());
+        document.body.addEventListener('click', this.addElement.bind(this));
         document.body.addEventListener('click', this.editElement.bind(this));
         document.body.addEventListener('click', this.deleteElement.bind(this));
         document.body.addEventListener('click', this.findElement.bind(this));
