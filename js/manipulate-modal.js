@@ -21,7 +21,6 @@ function manipulateAddModal(even) {
             modalWindow.style.display = "none";
         }
     }
-
 }
 
 function manipulateEditModal(even) {
@@ -30,9 +29,12 @@ function manipulateEditModal(even) {
 
     if(even.target.closest('.item-icon_edit')) {
         if(modal.style.display = "none") {
-            document.body.style.overflow = "hidden";
+            
+            // document.body.style.overflow = "hidden";
             modal.style.display = "flex";
             modalWindow.style.display = "block";
+            modalWindow.scrollIntoView({block: "center", behavior: "smooth"});
+            document.body.style.overflow = "hidden";
         }
     }
     if(even.target.closest('.modal-edit__close')) {

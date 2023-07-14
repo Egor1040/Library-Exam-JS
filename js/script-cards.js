@@ -16,17 +16,14 @@ class Model {
         return JSON.parse(arr);
     }
 
-    setToLocalChoice() {
-        const arr = JSON.parse(localStorage.getItem('arrCards'));
-        const obj = {
-            id: 1,
-            visitor: document.querySelector('.add-descr__item_visitor').value,
-            book: document.querySelector('.add-descr__item_book').value,
-            dateGet: '22.03.1998',
-            dateBack: '22.03.1998'
-        }
-        arr.push(obj);
-        localStorage.setItem('arrCards', JSON.stringify(arr));
+    getDateNow() {
+        const date = new Date();
+
+        let d = date.getDate().toString().padStart(2, '0');
+        let m = (date.getMonth() + 1).toString().padStart(2, '0');
+        let y = date.getFullYear();
+
+        return `${d}.${m}.${y}`;
     }
 }
 
@@ -38,15 +35,21 @@ class View {
     }
 
     renderSelectVisitor(arrVis) {
-        arrVis.forEach(elem => {
-            let html = `<option>${elem.fullName}</option>`;
+        if(arrVis === null) {
+            let html = `<option>Відвідувачів немає</option>`;
             this.selectVisitor.insertAdjacentHTML('beforeend', html);
-        });
+        }
+        if(arrVis !== null) {
+            arrVis.forEach((elem) => {
+                let html = `<option>${elem.fullName}</option>`;
+                this.selectVisitor.insertAdjacentHTML('beforeend', html);
+            });
+        }
     }
 
     renderSelectBook(arrBooks) {
-        arrBooks.forEach(elem => {
-            let html = `<option>${elem.name ? elem.name : 'Пусто'}</option>`;
+        arrBooks.forEach((elem) => {
+            let html = `<option class="option-book">${elem.name ? elem.name : 'Пусто'}</option>`;
             this.selectBook.insertAdjacentHTML('beforeend', html);
         });
     }
@@ -59,7 +62,7 @@ class View {
                             <td class="table-descr__item">${elem.visitor}</td>
                             <td class="table-descr__item">${elem.book}</td>
                             <td class="table-descr__item">${elem.dateGet}</td>
-                            <td class="table-descr__item">${elem.dateBack}</td>
+                            <td class="table-descr__item" style="height: 39px" data-id="${index}">${elem.dateBack}</td>
                         </tr>`;
             this.tableBody.insertAdjacentHTML('beforeend', html);
         });
@@ -72,10 +75,48 @@ class Controller {
         this.view = new View();
     }
 
+    setToLocalChoiceElement(getDate,dataId) {
+        const arr = JSON.parse(localStorage.getItem('arrCards'));
+        const obj = {
+            visitor: document.querySelector('.add-descr__item_visitor').value,
+            book: document.querySelector('.add-descr__item_book').value,
+            dateGet: getDate,
+            dateBack: `<div class="item-icon item-icon_return" data-id="${dataId}"><img src="./img/icon/return-arrow.png"></div>`
+        }
+        arr.push(obj);
+        localStorage.setItem('arrCards', JSON.stringify(arr));
+    }
+
     addCard(even) {
         if(even.target.matches('.modal-window__add')) {
-            this.model.setToLocalChoice();
+            let visitor = document.querySelector('.add-descr__item_visitor').value;
+            let same = document.querySelector('.add-descr__item_book').value;
+            let bookArr = this.model.getLocalArrBooks();
+            let index = bookArr.findIndex(elem => elem.name === same);
+
+            bookArr[index].value -= 1;
+            if(bookArr[index].value !== -1 && visitor !== 'Відвідувачів немає') {
+                this.setToLocalChoiceElement(this.model.getDateNow(),index);
+                let arr = JSON.parse(localStorage.getItem('arrCards'));
+                this.view.renderTableEl(arr);
+                localStorage.setItem('arrBooks', JSON.stringify(bookArr));
+            }
+        }
+    }
+
+    returnCard(even) {
+        if(even.target.closest('.item-icon_return')) {
+            let dataIdBooks = even.target.parentElement.dataset.id;
+            let dataIdCards = even.target.parentElement.parentNode.dataset.id;
+            let bookArr = this.model.getLocalArrBooks();
             let arr = JSON.parse(localStorage.getItem('arrCards'));
+
+            bookArr[dataIdBooks].value += 1;
+            arr[dataIdCards].dateBack = `${this.model.getDateNow()}`;
+
+            localStorage.setItem('arrCards', JSON.stringify(arr));
+            localStorage.setItem('arrBooks', JSON.stringify(bookArr));
+
             this.view.renderTableEl(arr);
         }
     }
@@ -85,6 +126,7 @@ class Controller {
         this.view.renderSelectVisitor(this.model.getLocalArrVisitors());
         this.view.renderSelectBook(this.model.getLocalArrBooks());
         document.body.addEventListener('click', this.addCard.bind(this));
+        document.body.addEventListener('click', this.returnCard.bind(this));
     }
 }
 
