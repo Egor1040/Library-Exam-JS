@@ -29,8 +29,6 @@ function manipulateEditModal(even) {
 
     if(even.target.closest('.item-icon_edit')) {
         if(modal.style.display = "none") {
-            
-            // document.body.style.overflow = "hidden";
             modal.style.display = "flex";
             modalWindow.style.display = "block";
             modalWindow.scrollIntoView({block: "center", behavior: "smooth"});

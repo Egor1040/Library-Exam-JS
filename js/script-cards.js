@@ -29,6 +29,7 @@ class Model {
 
 class View {
     constructor() {
+        this.mainContainer = document.querySelector('.table-body');
         this.selectVisitor = document.querySelector('.add-descr__item_visitor');
         this.selectBook = document.querySelector('.add-descr__item_book');
         this.tableBody = document.querySelector('.table-body');
@@ -49,8 +50,10 @@ class View {
 
     renderSelectBook(arrBooks) {
         arrBooks.forEach((elem) => {
-            let html = `<option class="option-book">${elem.name ? elem.name : 'Пусто'}</option>`;
-            this.selectBook.insertAdjacentHTML('beforeend', html);
+            if(elem.value > 0) {
+                let html = `<option class="option-book">${elem.name ? elem.name : 'Пусто'}</option>`;
+                this.selectBook.insertAdjacentHTML('beforeend', html);
+            }
         });
     }
 
@@ -75,7 +78,7 @@ class Controller {
         this.view = new View();
     }
 
-    setToLocalChoiceElement(getDate,dataId) {
+    setToLocalStorageSelectElement(getDate,dataId) {
         const arr = JSON.parse(localStorage.getItem('arrCards'));
         const obj = {
             visitor: document.querySelector('.add-descr__item_visitor').value,
@@ -93,13 +96,21 @@ class Controller {
             let same = document.querySelector('.add-descr__item_book').value;
             let bookArr = this.model.getLocalArrBooks();
             let index = bookArr.findIndex(elem => elem.name === same);
+            let modal = document.querySelector('.add-modal');
+            let modalWindow = document.querySelector('.modal-window');
 
             bookArr[index].value -= 1;
             if(bookArr[index].value !== -1 && visitor !== 'Відвідувачів немає') {
-                this.setToLocalChoiceElement(this.model.getDateNow(),index);
+                this.setToLocalStorageSelectElement(this.model.getDateNow(),index);
                 let arr = JSON.parse(localStorage.getItem('arrCards'));
                 this.view.renderTableEl(arr);
                 localStorage.setItem('arrBooks', JSON.stringify(bookArr));
+
+                document.querySelector('.add-descr__item_book').innerHTML = '';
+                document.body.style.overflow = "visible";
+                modal.style.display = "none";
+                modalWindow.style.display = "none";
+                this.view.renderSelectBook(this.model.getLocalArrBooks());
             }
         }
     }
@@ -118,6 +129,49 @@ class Controller {
             localStorage.setItem('arrBooks', JSON.stringify(bookArr));
 
             this.view.renderTableEl(arr);
+            document.querySelector('.add-descr__item_book').innerHTML = '';
+            this.view.renderSelectBook(this.model.getLocalArrBooks());
+        }
+    }
+
+    sortForDateBack(even) {
+        let arr = this.model.getLocalCards();
+
+        if(even.target.matches('#sort')) {
+            const arrSort = arr.sort((a,b) => new Date(a.dateBack.split('.').reverse().join('-')) - new Date(b.dateBack.split('.').reverse().join('-')));
+            this.view.renderTableEl(arrSort);
+        }
+    }
+
+    findElement(even) {
+        if (even.target.matches('#search')) {
+            let searchVal = document.querySelector('.choice-by__text').value.trim();
+            const arr = this.model.getLocalCards();
+            const tempArr = [];
+
+            if (searchVal !== '') {
+                arr.forEach(function(elem) {
+                    let v = elem.visitor;
+                    let b = elem.book;
+
+                    if(v.indexOf(searchVal) !== -1 || b.indexOf(searchVal) !== -1) {
+                        let obj = {
+                            visitor: elem.visitor,
+                            book: elem.book,
+                            dateGet: elem.dateGet,
+                            dateBack: elem.dateBack,
+                        }
+
+                        tempArr.push(obj)
+                    }
+                });
+                this.view.mainContainer.innerHTML = '';
+                this.view.renderTableEl(tempArr);
+            } else if (searchVal === '') {
+                const arr = this.model.getLocalCards();
+                this.view.mainContainer.innerHTML = '';
+                this.view.renderTableEl(arr);
+            }
         }
     }
 
@@ -127,6 +181,8 @@ class Controller {
         this.view.renderSelectBook(this.model.getLocalArrBooks());
         document.body.addEventListener('click', this.addCard.bind(this));
         document.body.addEventListener('click', this.returnCard.bind(this));
+        document.body.addEventListener('click', this.sortForDateBack.bind(this));
+        document.body.addEventListener('click', this.findElement.bind(this));
     }
 }
 

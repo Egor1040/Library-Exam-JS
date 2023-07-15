@@ -87,10 +87,15 @@
         @include adaptive-value("gap", 10, 5, 1);
     }
     &__label {
-        @include flex($ai: center, $jc: flex-end);
-        text-align: right;
-        @include adaptive-value("width", 120, 70, 1);
+        @include flex($ai: center, $jc: flex-start);
+        @include adaptive-value("width", 110, 70, 1);
         @include adaptive-value("font-size", 14, 12, 1);
+        &_title {
+            @include flex($ai: center, $jc: flex-end); 
+            @media(max-width: 745px) {
+                @include flex($ai: center, $jc: flex-start);   
+            }
+        }
     }
     &__select {
         @include adaptive-value("width", 170, 100, 1);
