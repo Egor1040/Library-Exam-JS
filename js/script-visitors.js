@@ -10,7 +10,7 @@ class Model {
         return JSON.parse(arr);
     }
 
-    addVisitor() {
+    addVisitor(close) {
         let agree = false;
 
         let id = document.querySelector('#addId').value.trim();
@@ -39,16 +39,16 @@ class Model {
             fullName: fullName,
             phoneNumber: phoneNumber,
         }
-        console.log(obj)
 
         if(agree) {
             const arr = JSON.parse(localStorage.getItem('arrVisitors'));
             arr.push(obj);
             localStorage.setItem('arrVisitors', JSON.stringify(arr));
+            close();
         }
     }
 
-    editVisitor(id) {
+    editVisitor(id,close) {
         let agree = false;
 
         const arr = JSON.parse(localStorage.getItem('arrVisitors'));
@@ -68,7 +68,6 @@ class Model {
             
         for (const condition of conditions) {
             if (condition.check) {
-                console.log(condition.check)
                 arr[id][condition.key] = condition.value;
             } else {
                 isValid = false;
@@ -76,10 +75,26 @@ class Model {
         }
 
         agree = isValid;
-        console.log(agree)
         if(agree) {
             localStorage.setItem('arrVisitors', JSON.stringify(arr));
+            close();
         }
+    }
+
+    closeModalAdd() {
+        let modal = document.querySelector('.add-modal');
+        let modalWindow = document.querySelector('.modal-window');
+        document.body.style.overflow = "visible";
+        modal.style.display = "none";
+        modalWindow.style.display = "none";
+    }
+
+    closeModalEdit() {
+        let modal = document.querySelector('.edit-modal');
+        let modalWindow = document.querySelector('.modal-edit');
+        document.body.style.overflow = "visible";
+        modal.style.display = "none";
+        modalWindow.style.display = "none";
     }
 
     sortDataStr(val,paramSort,keyData,dataArr,container,renderFunc) {
@@ -161,7 +176,7 @@ class Controller {
 
     addElement(even) {
         if(even.target.matches('.modal-window__add')) {
-            this.model.addVisitor();
+            this.model.addVisitor(this.model.closeModalAdd);
             this.view.mainContainer.innerHTML = '';
             const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
@@ -175,8 +190,7 @@ class Controller {
         }
 
         if(even.target.matches('.modal-edit__add')) {
-            this.model.editVisitor(even.target.dataset.id);
-            console.log(even.target.dataset.id)
+            this.model.editVisitor(even.target.dataset.id,this.model.closeModalEdit);
             this.view.mainContainer.innerHTML = '';
             const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
@@ -218,7 +232,6 @@ class Controller {
     sortElement(even) {
         let target = even.target;
         if(target.matches('#sort')) {
-            console.log('LOL')
             let val = document.querySelector('#sortBy').value;
 
             this.model.sortDataNumber(val, 'id', 'id',this.model.getLocalArr(),this.view.mainContainer,this.view);

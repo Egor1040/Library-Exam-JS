@@ -10,7 +10,7 @@ class Model {
         return JSON.parse(arr);
     }
 
-    addBook() {
+    addBook(close) {
         let agree = false;
 
         let id = document.querySelector('#addId').value.trim();
@@ -55,10 +55,11 @@ class Model {
             const arr = JSON.parse(localStorage.getItem('arrBooks'));
             arr.push(obj);
             localStorage.setItem('arrBooks', JSON.stringify(arr));
+            close();
         }
     }
 
-    editBook(id) {
+    editBook(id,close) {
         let agree = false;
 
         const arr = JSON.parse(localStorage.getItem('arrBooks'));
@@ -94,7 +95,24 @@ class Model {
         agree = isValid;
         if(agree) {
             localStorage.setItem('arrBooks', JSON.stringify(arr));
+            close();
         }
+    }
+
+    closeModalAdd() {
+        let modal = document.querySelector('.add-modal');
+        let modalWindow = document.querySelector('.modal-window');
+        document.body.style.overflow = "visible";
+        modal.style.display = "none";
+        modalWindow.style.display = "none";
+    }
+
+    closeModalEdit() {
+        let modal = document.querySelector('.edit-modal');
+        let modalWindow = document.querySelector('.modal-edit');
+        document.body.style.overflow = "visible";
+        modal.style.display = "none";
+        modalWindow.style.display = "none";
     }
 
     deleteBook(id) {
@@ -190,7 +208,7 @@ class Controller {
 
     addElement(even) {
         if(even.target.matches('.modal-window__add')) {
-            this.model.addBook();
+            this.model.addBook(this.model.closeModalAdd);
             this.view.mainContainer.innerHTML = '';
             const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
@@ -204,7 +222,7 @@ class Controller {
         }
 
         if(even.target.matches('.modal-edit__add')) {
-            this.model.editBook(even.target.dataset.id);
+            this.model.editBook(even.target.dataset.id,this.model.closeModalEdit);
             this.view.mainContainer.innerHTML = '';
             const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
