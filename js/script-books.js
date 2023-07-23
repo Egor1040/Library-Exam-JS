@@ -267,8 +267,8 @@ class Controller {
         nameAuthor.value = arr[id].nameAuthor;
         year.value = arr[id].year;
         namePublish.value = arr[id].publishHouse;
-        pageValue.value = arr[id].value;
-        valueBooks.value = arr[id].page;
+        pageValue.value = arr[id].page;
+        valueBooks.value = arr[id].value;
     }
 
     deleteElement(even) {
