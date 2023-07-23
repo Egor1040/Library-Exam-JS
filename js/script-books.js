@@ -48,8 +48,8 @@ class Model {
             nameAuthor: nameAuthor,
             year: Number(year),
             publishHouse: namePublish,
-            page: pageValue,
-            value: valueBooks
+            page: Number(pageValue),
+            value: Number(valueBooks)
         }
 
         if(agree) {
@@ -85,8 +85,8 @@ class Model {
             { check: regName.test(nameAuthor), value: nameAuthor, key: 'nameAuthor' },
             { check: Number(year) > 0, value: year, key: 'year' },
             { check: namePublish, value: namePublish, key: 'publishHouse' },
-            { check: Number(pageValue) > 0, value: pageValue, key: 'page' },
-            { check: Number(valueBooks) > 0, value: valueBooks, key: 'value' }
+            { check: Number(pageValue) > 0, value: Number(pageValue), key: 'page' },
+            { check: Number(valueBooks) > 0, value: Number(valueBooks), key: 'value' }
         ];
           
         let isValid = true;
