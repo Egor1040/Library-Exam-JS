@@ -239,6 +239,7 @@ class Controller {
 
     editElement(even) {
         if(even.target.closest('.item-icon_edit')) {
+            this.addValueForEdit(even.target.parentElement.dataset.id);
             let idEl = even.target.parentElement.dataset.id;
             document.querySelector('.modal-edit__add').setAttribute('data-id', idEl) 
         }
@@ -249,6 +250,25 @@ class Controller {
             const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
         } 
+    }
+
+    addValueForEdit(id) {
+        const arr = this.model.getLocalArr();
+        let editId = document.querySelector('#editId');
+        let name = document.querySelector('#editName');
+        let nameAuthor = document.querySelector('#editAuthor');
+        let year = document.querySelector('#editYear');
+        let namePublish = document.querySelector('#editNamePublish');
+        let pageValue = document.querySelector('#editPage');
+        let valueBooks = document.querySelector('#editValueBooks');
+
+        editId.value = arr[id].id;
+        name.value = arr[id].name;
+        nameAuthor.value = arr[id].nameAuthor;
+        year.value = arr[id].year;
+        namePublish.value = arr[id].publishHouse;
+        pageValue.value = arr[id].value;
+        valueBooks.value = arr[id].page;
     }
 
     deleteElement(even) {

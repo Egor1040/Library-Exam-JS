@@ -18,6 +18,7 @@ class Model {
         let phoneNumber = document.querySelector('#addPhone').value;
         let regFullName = /[а-я А-Яі]{5,40}/i;
         let regNumb = /0[0-9 -]{9,12}/i;
+        let addError = document.querySelector('.modal-window__error');
 
         const conditions = [
             { check: Number(id) > 0 },
@@ -45,6 +46,11 @@ class Model {
             arr.push(obj);
             localStorage.setItem('arrVisitors', JSON.stringify(arr));
             close();
+        } else {
+            addError.style.visibility = "visible";
+            setTimeout(function() {
+                addError.style.visibility = "hidden";
+            },2000)
         }
     }
 
@@ -57,6 +63,7 @@ class Model {
         let phoneNumber = document.querySelector('#editPhone').value;
         let regFullName = /[а-я А-Яі]{5,40}/i;
         let regNumb = /0[0-9 -]{9,12}/i;
+        let addError = document.querySelector('.modal-edit__error');
 
         const conditions = [
             { check: Number(editId) > 0, value: Number(editId), key: 'id'},
@@ -78,6 +85,11 @@ class Model {
         if(agree) {
             localStorage.setItem('arrVisitors', JSON.stringify(arr));
             close();
+        } else {
+            addError.style.visibility = "visible";
+            setTimeout(function() {
+                addError.style.visibility = "hidden";
+            },2000)
         }
     }
 
@@ -85,16 +97,26 @@ class Model {
         let modal = document.querySelector('.add-modal');
         let modalWindow = document.querySelector('.modal-window');
         document.body.style.overflow = "visible";
-        modal.style.display = "none";
         modalWindow.style.display = "none";
+        let html = `<img id="addDone" src="img/icon/icons-done.png">`;
+        modal.insertAdjacentHTML('afterbegin', html);
+        setTimeout(function() {
+            modal.style.display = "none";
+            modal.removeChild(document.querySelector('#addDone'));
+        },1000);
     }
 
     closeModalEdit() {
         let modal = document.querySelector('.edit-modal');
         let modalWindow = document.querySelector('.modal-edit');
         document.body.style.overflow = "visible";
-        modal.style.display = "none";
         modalWindow.style.display = "none";
+        let html = `<img id="editDone" src="img/icon/icons-done.png">`;
+        modal.insertAdjacentHTML('afterbegin', html);
+        setTimeout(function() {
+            modal.style.display = "none";
+            modal.removeChild(document.querySelector('#editDone'));
+        },1000);
     }
 
     sortDataStr(val,paramSort,keyData,dataArr,container,renderFunc) {
@@ -186,6 +208,7 @@ class Controller {
     editElement(even) {
         if(even.target.closest('.item-icon_edit')) {
             let idEl = even.target.parentElement.dataset.id;
+            this.addValueForEdit(idEl);
             document.querySelector('.modal-edit__add').setAttribute('data-id', idEl) 
         }
 
@@ -195,6 +218,17 @@ class Controller {
             const arr = this.model.getLocalArr();
             this.view.renderTableItem(arr);
         } 
+    }
+
+    addValueForEdit(id) {
+        const arr = this.model.getLocalArr();
+        let editId = document.querySelector('#editId');
+        let fullName = document.querySelector('#editFullName');
+        let phoneNumber = document.querySelector('#editPhone');
+
+        editId.value = arr[id].id;
+        fullName.value = arr[id].fullName;
+        phoneNumber.value = arr[id].phoneNumber;
     }
 
     findElement(even) {
