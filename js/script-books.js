@@ -282,15 +282,15 @@ class Controller {
 
     findElement(even) {
         if (even.target.matches('#search')) {
-            let searchVal = document.querySelector('.choice-by__text').value.trim();
+            let searchVal = document.querySelector('.choice-by__text').value.toLowerCase();
             const arr = this.model.getLocalArr();
             const tempArr = [];
 
             if (searchVal !== '') {
                 arr.forEach(function(elem) {
-                    let n = elem.name;
-                    let auth = elem.nameAuthor;
-                    let publ = elem.publishHouse;
+                    let n = elem.name.toLowerCase();
+                    let auth = elem.nameAuthor.toLowerCase();
+                    let publ = elem.publishHouse.toLowerCase();
 
                     if(n.indexOf(searchVal) !== -1 || auth.indexOf(searchVal) !== -1 || publ.indexOf(searchVal) !== -1) {
                         let obj = {

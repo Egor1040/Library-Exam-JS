@@ -233,16 +233,17 @@ class Controller {
 
     findElement(even) {
         if (even.target.matches('#search')) {
-            let searchVal = document.querySelector('.choice-by__text').value.trim();
+            let searchVal = document.querySelector('.choice-by__text').value.toLowerCase();
+            console.log(searchVal)
             const arr = this.model.getLocalArr();
             const tempArr = [];
 
             if (searchVal !== '') {
                 arr.forEach(function(elem) {
-                    let id = String(elem.id);
-                    let fullName = String(elem.fullName);
+                    let fullName = String(elem.fullName).toLowerCase();
+                    let phoneNumber = String(elem.phoneNumber);
 
-                    if(id.indexOf(searchVal) !== -1 || fullName.indexOf(searchVal) !== -1) {
+                    if(fullName.indexOf(searchVal) !== -1 || phoneNumber.indexOf(searchVal) !== -1) {
                         let obj = {
                             id: elem.id,
                             fullName: elem.fullName,
