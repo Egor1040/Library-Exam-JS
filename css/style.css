@@ -310,6 +310,14 @@ a {
 .modal-window__add:hover {
   background-color: silver;
 }
+.modal-window__error {
+  padding: 5px;
+  height: 35px;
+  visibility: hidden;
+  display: block;
+  text-align: center;
+  color: red;
+}
 
 .add-descr {
   margin: 10px 0;
@@ -642,6 +650,14 @@ a {
 }
 .modal-edit__add:hover {
   background-color: silver;
+}
+.modal-edit__error {
+  padding: 5px;
+  height: 35px;
+  visibility: hidden;
+  display: block;
+  text-align: center;
+  color: red;
 }
 
 .statistics {

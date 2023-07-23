@@ -62,6 +62,14 @@
             background-color: silver;
         }
     }
+    &__error {
+        padding: 5px;
+        height: 35px;
+        visibility: hidden;
+        display: block;
+        text-align: center;
+        color: red;
+    }
 }
 
 .add-descr {
@@ -249,6 +257,14 @@
         &:hover {
             background-color: silver;
         }
+    }
+    &__error {
+        padding: 5px;
+        height: 35px;
+        visibility: hidden;
+        display: block;
+        text-align: center;
+        color: red;
     }
 }
 

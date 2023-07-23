@@ -21,6 +21,7 @@ class Model {
         let pageValue = document.querySelector('#addPage').value.trim();
         let valueBooks = document.querySelector('#addValueBooks').value.trim();
         let regName = /[а-я А-Яі]{5,40}/i;
+        let addError = document.querySelector('.modal-window__error');
 
         const conditions = [
             { check: Number(id) > 0 },
@@ -56,6 +57,11 @@ class Model {
             arr.push(obj);
             localStorage.setItem('arrBooks', JSON.stringify(arr));
             close();
+        } else {
+            addError.style.visibility = "visible";
+            setTimeout(function() {
+                addError.style.visibility = "hidden";
+            },2000)
         }
     }
 
@@ -71,6 +77,7 @@ class Model {
         let pageValue = document.querySelector('#editPage').value.trim();
         let valueBooks = document.querySelector('#editValueBooks').value.trim();
         let regName = /[а-я А-Яі]{5,40}/i;
+        let addError = document.querySelector('.modal-edit__error');
 
         const conditions = [
             { check: Number(editId) > 0, value: Number(editId), key: 'id' },
@@ -96,6 +103,11 @@ class Model {
         if(agree) {
             localStorage.setItem('arrBooks', JSON.stringify(arr));
             close();
+        } else {
+            addError.style.visibility = "visible";
+            setTimeout(function() {
+                addError.style.visibility = "hidden";
+            },2000)
         }
     }
 
@@ -103,16 +115,26 @@ class Model {
         let modal = document.querySelector('.add-modal');
         let modalWindow = document.querySelector('.modal-window');
         document.body.style.overflow = "visible";
-        modal.style.display = "none";
         modalWindow.style.display = "none";
+        let html = `<img id="addDone" src="img/icon/icons-done.png">`;
+        modal.insertAdjacentHTML('afterbegin', html);
+        setTimeout(function() {
+            modal.style.display = "none";
+            modal.removeChild(document.querySelector('#addDone'));
+        },1000);
     }
 
     closeModalEdit() {
         let modal = document.querySelector('.edit-modal');
         let modalWindow = document.querySelector('.modal-edit');
         document.body.style.overflow = "visible";
-        modal.style.display = "none";
         modalWindow.style.display = "none";
+        let html = `<img id="editDone" src="img/icon/icons-done.png">`;
+        modal.insertAdjacentHTML('afterbegin', html);
+        setTimeout(function() {
+            modal.style.display = "none";
+            modal.removeChild(document.querySelector('#editDone'));
+        },1000);
     }
 
     deleteBook(id) {
