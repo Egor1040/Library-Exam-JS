@@ -25,6 +25,19 @@ class Model {
 
         return `${d}.${m}.${y}`;
     }
+
+    closeModalAdd() {
+        let modal = document.querySelector('.add-modal');
+        let modalWindow = document.querySelector('.modal-window');
+        document.body.style.overflow = "visible";
+        modalWindow.style.display = "none";
+        let html = `<img id="addDone" src="img/icon/icons-done.png">`;
+        modal.insertAdjacentHTML('afterbegin', html);
+        setTimeout(function() {
+            modal.style.display = "none";
+            modal.removeChild(document.querySelector('#addDone'));
+        },1000);
+    }
 }
 
 class View {
@@ -96,8 +109,6 @@ class Controller {
             let same = document.querySelector('.add-descr__item_book').value;
             let bookArr = this.model.getLocalArrBooks();
             let index = bookArr.findIndex(elem => elem.name === same);
-            let modal = document.querySelector('.add-modal');
-            let modalWindow = document.querySelector('.modal-window');
 
             bookArr[index].value -= 1;
             if(bookArr[index].value !== -1 && visitor !== 'Відвідувачів немає') {
@@ -108,9 +119,8 @@ class Controller {
 
                 document.querySelector('.add-descr__item_book').innerHTML = '';
                 document.body.style.overflow = "visible";
-                modal.style.display = "none";
-                modalWindow.style.display = "none";
                 this.view.renderSelectBook(this.model.getLocalArrBooks());
+                this.model.closeModalAdd();
             }
         }
     }
